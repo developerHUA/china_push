@@ -23,26 +23,30 @@ abstract class ChinaPushPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-
   Future<dynamic> initPush() {
     throw UnimplementedError('initPush() has not been implemented.');
   }
+
   Future<String?> getRegId() {
     throw UnimplementedError('getRegId() has not been implemented.');
   }
 
-
   void setNotificationClickListener(Function(dynamic) onNotificationClick) {
-    throw UnimplementedError('addNotificationClickListener() has not been implemented.');
+    throw UnimplementedError(
+        'addNotificationClickListener() has not been implemented.');
   }
 
   Future<String?> getManufacturer() {
-    throw UnimplementedError('addNotificationClickListener() has not been implemented.');
+    throw UnimplementedError(
+        'addNotificationClickListener() has not been implemented.');
   }
 
+  void enableLog(bool enable) {
+    throw UnimplementedError(
+        'addNotificationClickListener() has not been implemented.');
+  }
 }

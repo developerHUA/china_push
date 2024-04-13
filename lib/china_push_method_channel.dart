@@ -12,13 +12,16 @@ class MethodChannelChinaPush extends ChinaPushPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('china_push');
 
+  MethodChannelChinaPush() {
+    methodChannel.setMethodCallHandler(flutterMethod);
+  }
 
   Function(dynamic)? onNotificationClick;
 
   @override
   Future<String?> getPlatformVersion() async {
     final version =
-    await methodChannel.invokeMethod<String>('getPlatformVersion');
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
 
@@ -37,6 +40,11 @@ class MethodChannelChinaPush extends ChinaPushPlatform {
   @override
   Future<String?> getRegId() async {
     return await methodChannel.invokeMethod('getRegId');
+  }
+
+  @override
+  void enableLog(bool enable) {
+    methodChannel.invokeMethod('enableLog',enable);
   }
 
   Future<dynamic> flutterMethod(MethodCall methodCall) async {

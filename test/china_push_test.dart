@@ -33,6 +33,11 @@ class MockChinaPushPlatform
   void setNotificationClickListener(Function(dynamic p1) onNotificationClick) {
     // TODO: implement setNotificationClickListener
   }
+
+  @override
+  void enableLog(bool enable) {
+
+  }
 }
 
 void main() {

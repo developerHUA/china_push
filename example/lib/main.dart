@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    ChinaPush.enableLog(true);
     ChinaPush.initPush().then((value) {
       setState(() {
         logs.add("init success : $value");
@@ -40,6 +41,7 @@ class _MyAppState extends State<MyApp> {
       });
     });
 
+    // 建议在路由初始化后的首个界面设置回调
     ChinaPush.setOnClickNotification((dynamic value) {
       print("onClickNotification : value : $value");
       setState(() {

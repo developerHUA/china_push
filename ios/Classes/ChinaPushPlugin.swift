@@ -33,6 +33,10 @@ public class ChinaPushPlugin: NSObject,  FlutterPlugin,UNUserNotificationCenterD
               result(regId)
           case "getManufacturer":
               result(manufacturer)
+          case "enableLog":
+              if let isEnabled = call.arguments as? Bool {
+                  Logger.isEnabled = isEnabled
+              }
           default:
               result(FlutterMethodNotImplemented)
           }
@@ -72,6 +76,7 @@ public class ChinaPushPlugin: NSObject,  FlutterPlugin,UNUserNotificationCenterD
 
           let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
           self.regId = deviceTokenString
+          Logger.log("onResister Success")
           result?(["regId":regId,"manufacturer":"APPLE"])
       }
 
@@ -110,6 +115,7 @@ public class ChinaPushPlugin: NSObject,  FlutterPlugin,UNUserNotificationCenterD
 
 
       private func onMessage(userInfo: [AnyHashable: Any]) {
+          Logger.log("onMessage")
           channel?.invokeMethod("onNotificationClick", arguments: ((userInfo["aps"] as? [String: Any])?["attributes"] as? [String: Any])?["data"] as? String ?? nil)
       }
 

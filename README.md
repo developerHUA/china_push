@@ -202,7 +202,7 @@ import 'package:china_push/china_push.dart';
 
 
 ```dart
-    // 建议在main.dart里面添加，否则应用冷启动会导致监听还没设置回调已经结束
+    // 建议在路由初始化后的首个界面里设置，否则应用冷启动会导致监听还没设置回调已经结束
     ChinaPush.setOnClickNotification((dynamic value) {
         print("onClickNotification : value : $value");
     });

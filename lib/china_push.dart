@@ -18,6 +18,10 @@ class ChinaPush {
     return await ChinaPushPlatform.instance.getManufacturer();
   }
 
+  static void enableLog(bool enable)  {
+      ChinaPushPlatform.instance.enableLog(enable);
+  }
+
   static void setOnClickNotification(Function(dynamic) onClickNotification) {
     ChinaPushPlatform.instance
         .setNotificationClickListener(onClickNotification);
