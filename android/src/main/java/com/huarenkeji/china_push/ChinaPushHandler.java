@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.huarenkeji.china_push.callback.OnOpenNotification;
 import com.huarenkeji.china_push.callback.OnRegisterCallback;
+import com.huarenkeji.china_push.util.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +64,12 @@ public class ChinaPushHandler implements MethodChannel.MethodCallHandler, OnRegi
                 result.success(PushManager.getManufacturer());
                 break;
             case "enableLog":
-                PushManager.enableLog(Boolean.TRUE.equals(call.argument("enable")));
+                try {
+                    boolean enable = Boolean.parseBoolean(call.arguments.toString());
+                    PushManager.enableLog(enable);
+                } catch (Exception e) {
+                    Logger.i("enableLog fail params error : " + e.getMessage());
+                }
                 break;
             default:
                 result.notImplemented();
