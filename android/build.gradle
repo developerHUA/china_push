@@ -1,0 +1,63 @@
+group 'com.huarenkeji.china_push'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://developer.huawei.com/repo/" }
+        maven { url "https://developer.hihonor.com/repo" }
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://developer.huawei.com/repo/" }
+        maven { url "https://developer.hihonor.com/repo" }
+
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.huarenkeji.china_push'
+    }
+
+    compileSdk 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 19
+    }
+
+    dependencies {
+        testImplementation 'junit:junit:4.13.2'
+        testImplementation 'org.mockito:mockito-core:5.0.0'
+    }
+
+    testOptions {
+        unitTests.all {
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen {false}
+                showStandardStreams = true
+            }
+        }
+    }
+}
+dependencies {
+    compileOnly fileTree(dir: "libs", include: ["*.jar", "*.aar"])
+    implementation "com.google.code.gson:gson:2.10.1"
+    implementation "commons-codec:commons-codec:1.6"
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "com.huawei.hms:push:6.12.0.300"
+    implementation "com.hihonor.mcs:push:7.0.61.303"
+}

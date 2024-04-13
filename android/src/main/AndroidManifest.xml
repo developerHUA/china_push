@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.huarenkeji.china_push">
+
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- 荣耀推送配置需要 -->
+    <queries>
+        <intent>
+            <action android:name="com.hihonor.push.action.BIND_PUSH_SERVICE" />
+        </intent>
+    </queries>
+    <!-- 华为推送配置需要 -->
+    <queries>
+        <intent>
+            <action android:name="com.huawei.hms.core.aidlservice" />
+        </intent>
+    </queries>
+
+    <application>
+        <!-- 小米推送配置 -->
+        <receiver
+            android:name=".receiver.MiPushMessageReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.ERROR" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="MI_APP_ID"
+            android:value="\${MI_APP_ID}" />
+
+        <meta-data
+            android:name="MI_APP_KEY"
+            android:value="\${MI_APP_KEY}" />
+
+        <!-- OPPO 推送配置 -->
+        <service
+            android:name="com.heytap.msp.push.service.CompatibleDataMessageCallbackService"
+            android:exported="true"
+            android:permission="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE">
+            <intent-filter>
+                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.heytap.msp.push.service.DataMessageCallbackService"
+            android:exported="true"
+            android:permission="com.heytap.mcs.permission.RECIEVE_PUSH_MESSAGE">
+            <intent-filter>
+                <action android:name="com.heytap.mcs.action.RECEIVE_MCS_MESSAGE" />
+                <action android:name="com.heytap.msp.push.RECEIVE_MCS_MESSAGE" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="OPPO_APP_KEY"
+            android:value="${OPPO_APP_KEY}" />
+
+        <meta-data
+            android:name="OPPO_APP_SECRET"
+            android:value="${OPPO_APP_SECRET}" />
+
+        <!-- vivo 推送配置 -->
+        <meta-data
+            android:name="api_key"
+            android:value="${VIVO_APP_KEY}" />
+
+        <meta-data
+            android:name="app_id"
+            android:value="${VIVO_APP_ID}" />
+
+        <receiver
+            android:name=".receiver.VivoPushMessageReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.vivo.pushclient.action.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.vivo.push.sdk.service.CommandClientService"
+            android:exported="true"
+            android:permission="com.push.permission.UPSTAGESERVICE" />
+
+
+        <!-- 华为推送配置 -->
+        <meta-data
+            android:name="HMS_APP_ID"
+            android:value="\${HMS_APP_ID}" />
+        <service
+            android:name=".receiver.HmsPushMessageReceiver"
+            android:directBootAware="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+        <!-- 荣耀推送配置 -->
+        <meta-data
+            android:name="com.hihonor.push.app_id"
+            android:value="\${HONOR_APP_ID}" />
+        <service
+            android:name=".receiver.HonorPushMessageReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.hihonor.push.action.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+    </application>
+
+
+</manifest>
